@@ -83,12 +83,14 @@
             ./modules/hedgedoc.nix
             ./modules/padlist.nix
             ./modules/nextcloud.nix
+            ./modules/keycloak.nix
+            ./modules/monitoring.nix
             ./modules/vaultwarden.nix
             ./modules/forgejo
             ./modules/kanboard.nix
             ./modules/zammad.nix
             ./modules/decisions.nix
-            ./modules/struktur-bot.nix
+            # ./modules/struktur-bot.nix
             {
               nixpkgs.overlays = [ self.overlays.default ];
               sops.defaultSopsFile = ./secrets/quitte.yaml;
@@ -106,7 +108,6 @@
             ./hosts/tomate/configuration.nix
             ./modules/core/base.nix
             ./modules/core/zsh.nix
-            ./modules/core/fail2ban.nix
             ./modules/core/sssd.nix
             {
               sops.defaultSopsFile = ./secrets/tomate.yaml;

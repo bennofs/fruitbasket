@@ -8,6 +8,7 @@
   imports =
     [
       # Include the results of the hardware scan.
+      ./network.nix
       ./hardware-configuration.nix
     ];
 
@@ -15,8 +16,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "tomate"; # Define your hostname.
-  networking.nftables.enable = true;
 
   nix = {
     settings = {
@@ -28,9 +27,6 @@
       ];
     };
   };
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";

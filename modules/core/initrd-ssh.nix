@@ -6,13 +6,14 @@
 { config, ... }:
 {
   boot.initrd = {
+    availableKernelModules = [ "mlx5_core" ];
     systemd = {
       enable = true;
       network = {
         enable = true;
         networks."10-wired-default" = config.systemd.network.networks."10-wired-default";
       };
-      users.root.shell = "/bin/zfs load-key rpool/nixos";
+      users.root.shell = "/bin/systemd-tty-ask-password-agent";
     };
     network = {
       enable = true;

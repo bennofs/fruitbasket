@@ -6,14 +6,14 @@ in
   sops.secrets."decisions_env" = { };
   virtualisation.oci-containers = {
     containers.decisions = {
-      image = "decisions";
+      image = "ghcr.io/fsr/decisions";
       volumes = [
         "/var/lib/nextcloud/data/root/files/FSR/protokolle:/protokolle:ro"
       ];
+      extraOptions = [ "--network=host" ];
       environmentFiles = [
         config.sops.secrets."decisions_env".path
       ];
-      extraOptions = [ "--network=host" ];
     };
   };
 
@@ -24,11 +24,6 @@ in
       };
     };
   };
-
-  services.portunus.dex.oidcClients = [{
-    id = "decisions";
-    callbackURL = "https://decisions.ifsr.de/auth";
-  }];
 
   systemd.timers."decisions-to-db" = {
     wantedBy = [ "timers.target" ];
