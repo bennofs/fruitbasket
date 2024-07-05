@@ -96,22 +96,21 @@ in
       extraConfigFiles = [
         (pkgs.writeTextFile {
           name = "matrix-synapse-extra-config.yml";
-          text = let portunus = config.services.portunus; in
-            ''
-              modules:
-                - module: ldap_auth_provider.LdapAuthProviderModule
-                  config:
-                    enabled: true
-                    uri: ldap://localhost
-                    base: ou=users,${portunus.ldap.suffix}
-                    # taken from kaki config
-                    attributes:
-                      uid: uid
-                      mail: uid
-                      name: cn
-                    bind_dn: uid=search,ou=users,${portunus.ldap.suffix}
-                    bind_password_file: ${config.sops.secrets.matrix_ldap_search.path}
-            '';
+          text = ''
+            modules:
+              - module: ldap_auth_provider.LdapAuthProviderModule
+                config:
+                  enabled: true
+                  uri: ldap://localhost
+                  base: ou=users,dc=ifsr,dc=de
+                  # taken from kaki config
+                  attributes:
+                    uid: uid
+                    mail: uid
+                    name: cn
+                  bind_dn: uid=search,ou=users,dc=ifsr,dc=de
+                  bind_password_file: ${config.sops.secrets.matrix_ldap_search.path}
+          '';
         })
       ];
     };

@@ -59,7 +59,7 @@ in
       occ = lib.getExe config.services.nextcloud.occ;
       ldapConfig = rec {
         ldapAgentName = "uid=search,ou=users,${ldapBase}";
-        ldapBase = config.services.portunus.ldap.suffix;
+        ldapBase = "dc=ifsr,dc=de";
         ldapBaseGroups = "ou=groups,${ldapBase}";
         ldapBaseUsers = "ou=users,${ldapBase}";
         ldapConfigurationActive = "1";

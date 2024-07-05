@@ -54,9 +54,9 @@ in
         # ldap auth
         ldap = rec {
           url = "ldap://localhost";
-          searchBase = "ou=users,${config.services.portunus.ldap.suffix}";
+          searchBase = "ou=users,dc=ifsr,dc=de";
           searchFilter = "(uid={{username}})";
-          bindDn = "uid=${config.services.portunus.ldap.searchUserName},${searchBase}";
+          bindDn = "uid=search,${searchBase}";
           bindCredentials = "\${LDAP_CREDENTIALS}";
           useridField = "uid";
           providerName = "iFSR";

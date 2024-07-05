@@ -85,17 +85,16 @@ in
   systemd.services.forgejo.preStart =
     let
       exe = lib.getExe config.services.forgejo.package;
-      portunus = config.services.portunus;
-      basedn = "ou=users,${portunus.ldap.suffix}";
+      basedn = "ou=users,dc=ifsr,dc=de";
       ldapConfigArgs = ''
         --name LDAP \
         --active \
         --security-protocol unencrypted \
-        --host '${portunus.domain}' \
+        --host 'auth.ifsr.de' \
         --port 389 \
         --user-search-base '${basedn}' \
         --user-filter '(&(objectClass=posixAccount)(uid=%s))' \
-        --admin-filter '(isMemberOf=cn=admins,ou=groups,${portunus.ldap.suffix})' \
+        --admin-filter '(isMemberOf=cn=admins,ou=groups,dc=ifsr,dc=de)' \
         --username-attribute uid \
         --firstname-attribute givenName \
         --surname-attribute sn \
